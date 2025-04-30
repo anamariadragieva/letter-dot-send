@@ -3,35 +3,42 @@
     <main class="flex-grow-1 container py-4">
         <h1 class="display-5 fw-light text-body-emphasis lh-1 mb-3">Compose a new post...</h1>
 
-        <form class="mt-5">
+        <form class="mt-5" action="/submit" method="POST">
+
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Title</label>
-                <input type="title" class="form-control" id="title" aria-describedby="emailHelp">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" name="title" class="form-control" >
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Author Name</label>
-                <input type="title" class="form-control" id="title" aria-describedby="emailHelp">
+                <label for="author" class="form-label">Author Name</label>
+                <input type="text" id="author" name="author" class="form-control" >
             </div>
 
 
             <div class="form-floating mt-4 mb-3">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 250px"></textarea>
-                <label for="floatingTextarea2">type your blog here in under 2,000 characters</label>
+                <textarea id="content" name="content" maxlength="2000" style="height: 250px" 
+                class="form-control" placeholder="type your blog here" ></textarea>
+                <label for="content">type your blog here in under 2,000 characters</label>
+            </div>
+            <div class="text-end small text-muted mb-3">
+                <span id="charCount">0</span>/2000 characters
             </div>
 
 
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Upload Thumbnail Image</label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
+            <!-- <div class="mb-3">
+                <label for="thumbnail" class="form-label">Upload Thumbnail Image</label>
+                <input type="file" id="thumbnail" name="thumbnail" class="form-control" accept="image/*" >
+            </div> -->
 
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">I agree with the Terms & Conditions</label>
+                <label for="agree" class="form-check-label">I agree with the Terms & Conditions</label>
+                <input type="checkbox" id="agree" name="agree" class="form-check-input" >
             </div>
+
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
         
     </main>
+
 <%- include("partials/footer") %>
