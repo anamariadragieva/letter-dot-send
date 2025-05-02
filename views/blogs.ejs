@@ -9,22 +9,22 @@
                         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-100 position-relative">
                             
                             <div class="col p-4 d-flex flex-column position-static">  
-                                <strong class="d-inline-block mb-2 text-primary-emphasis"> <%= blog.author %> </strong>
-                                <h3 class="mb-0"> <%= blog.title %> </h3>
-                                <div class="mb-1 text-body-secondary">Nov 12</div>
+                                <h2 class="mb-1"> <%= blog.title %> </h2>
+                                <h5 class="mb-1 text-primary-emphasis"> <%= blog.author %> </h5>
+                                <h6 class="mb-2 text-body-secondary"><%= blog.date %> </h6>
                                 <p class="card-text mb-auto"> 
                                     <%= blog.content.length > 99 ? blog.content.slice(0, 99) + "..." : blog.content %> 
                                 </p>
 
                                 <div class="btn-group-sm mt-3" role="group" aria-label="Small button group">
-                                    <button type="button" class="btn btn-options">View</button>
-                                    <button type="button" class="btn btn-options">Edit</button>
-                                    <button type="button" class="btn btn-options">Delete</button>
+                                    <a href="/blogs/<%= blog.id %>" class="btn btn-options">View</a>
+                                    <a href="/edit/<%= blog.id %>" class="btn btn-options">Edit</a>
+                                    <button type="button" class="btn btn-options delete-btn" data-id=" <%= blog.id %> ">Delete</button>
                                 </div>
                             </div>
 
                             <div class="col-auto d-none d-lg-block">
-                                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <img width="200" height="265" src="<%= blog.imageUrl ? `/uploads/${blog.imageUrl}` : null %>">
                             </div>
                         
                         </div>
@@ -33,9 +33,21 @@
             </div>
         </main>
     <% } else { %>
-        <h2>Nothing to see here yet..</h2>
-        <h3>..how about writing your first blog now!?</h3>
-        <button type="button" class="btn btn-options">Compose</button>
+        <main class="flex-grow-1 container py-4">
+            <div class="container my-5">
+                <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
+                <h1 class="text-body-emphasis">What, like it’s hard?</h1>
+                <p class="col-lg-6 mx-auto mb-4">
+                    No blogs yet — but you’ve totally got this. <br> Write your first post and show them your brilliance.
+                </p>
+                <a href="/create-new" class="btn px-3 mb-5 text-decoration-none">
+                    Speak Now or Forever Hold Your Blog 📝
+                </a>
+                </div>
+            </div>
+        </main>
+
+        
     <% } %>
 
 <%- include("partials/footer") %>

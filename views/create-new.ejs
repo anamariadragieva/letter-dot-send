@@ -1,42 +1,51 @@
 <%- include("partials/header") %>
 
     <main class="flex-grow-1 container py-4">
-        <h1 class="display-5 fw-light text-body-emphasis lh-1 mb-3">Compose a new post...</h1>
+        <h1 class="display-5 fw-light text-body-emphasis lh-1 mb-3">
+            <% blog ? "Edit your blog..." : "Compose a new blog..." %>
+        </h1>
 
-        <form class="mt-5" action="/submit" method="POST">
+        <form class="mt-5" action="<%= blog ? `/edit/${blog.id}` : '/submit' %>" method="POST" enctype="multipart/form-data">
+
+            <% if (blog) { %>
+                <input type="hidden" name="id" value="<%= blog.id %>">
+            <% } %>
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" id="title" name="title" class="form-control" >
+                <input type="text" id="title" name="title" class="form-control"
+                    value="<%= blog ? blog.title : '' %>" required>
             </div>
 
             <div class="mb-3">
                 <label for="author" class="form-label">Author Name</label>
-                <input type="text" id="author" name="author" class="form-control" >
+                <input type="text" id="author" name="author" class="form-control" 
+                    value="<%= blog ? blog.author : '' %>">
             </div>
 
 
-            <div class="form-floating mt-4 mb-3">
+            <div class="mb-3">
+                <label for="content"></label>
                 <textarea id="content" name="content" maxlength="2000" style="height: 250px" 
-                class="form-control" placeholder="type your blog here" ></textarea>
-                <label for="content">type your blog here in under 2,000 characters</label>
+                class="form-control" placeholder="type your blog here..." ><%= blog ? blog.content : '' %></textarea>
+                
             </div>
             <div class="text-end small text-muted mb-3">
                 <span id="charCount">0</span>/2000 characters
             </div>
 
 
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label for="thumbnail" class="form-label">Upload Thumbnail Image</label>
                 <input type="file" id="thumbnail" name="thumbnail" class="form-control" accept="image/*" >
-            </div> -->
+            </div>
 
             <div class="mb-3 form-check">
                 <label for="agree" class="form-check-label">I agree with the Terms & Conditions</label>
                 <input type="checkbox" id="agree" name="agree" class="form-check-input" >
             </div>
 
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" class="btn btn-primary"><%= blog ? "Update" : "Upload" %></button>
         </form>
         
     </main>
