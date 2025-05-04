@@ -5,7 +5,7 @@
             <% blog ? "Edit your blog..." : "Compose a new blog..." %>
         </h1>
 
-        <form class="mt-5" action="<%= blog ? `/edit/${blog.id}` : '/submit' %>" method="POST" enctype="multipart/form-data">
+        <form class="mt-5" action="<%= blog ? `/edit/${blog.id}` : '/submit' %>" method="POST">
 
             <% if (blog) { %>
                 <input type="hidden" name="id" value="<%= blog.id %>">
@@ -20,14 +20,14 @@
             <div class="mb-3">
                 <label for="author" class="form-label">Author Name</label>
                 <input type="text" id="author" name="author" class="form-control" 
-                    value="<%= blog ? blog.author : '' %>">
+                    value="<%= blog ? blog.author : '' %>" required>
             </div>
 
 
             <div class="mb-3">
                 <label for="content"></label>
                 <textarea id="content" name="content" maxlength="2000" style="height: 250px" 
-                class="form-control" placeholder="type your blog here..." ><%= blog ? blog.content : '' %></textarea>
+                class="form-control" placeholder="type your blog here..." required><%= blog ? blog.content : '' %></textarea>
                 
             </div>
             <div class="text-end small text-muted mb-3">
@@ -35,14 +35,14 @@
             </div>
 
 
-            <div class="mb-3">
+            <!--<div class="mb-3">
                 <label for="thumbnail" class="form-label">Upload Thumbnail Image</label>
                 <input type="file" id="thumbnail" name="thumbnail" class="form-control" accept="image/*" >
-            </div>
+            </div>-->
 
             <div class="mb-3 form-check">
                 <label for="agree" class="form-check-label">I agree with the Terms & Conditions</label>
-                <input type="checkbox" id="agree" name="agree" class="form-check-input" >
+                <input type="checkbox" id="agree" name="agree" class="form-check-input" required>
             </div>
 
             <button type="submit" class="btn btn-primary"><%= blog ? "Update" : "Upload" %></button>
